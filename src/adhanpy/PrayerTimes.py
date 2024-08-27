@@ -121,6 +121,19 @@ class PrayerTimes:
 
         self._adjust_prayers_time_zone()
 
+    def __getitem__(self, prayer):
+        prayers = {
+            "fajr": self.fajr,
+            "sunrise": self.sunrise,
+            "dhuhr": self.dhuhr,
+            "asr": self.asr,
+            "maghrib": self.maghrib,
+            "isha": self.isha
+        }
+        if prayer not in prayers:
+            raise IndexError("Invalid prayer name")
+        return prayers[prayer]
+
     def _set_fajr(self):
         temp_fajr = None
         if time_components := TimeComponents.from_float(
